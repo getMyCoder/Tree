@@ -21,26 +21,39 @@ $(function () {
             }
         }
     }
-    $("#Trees li h4").each(function () {
-        if($(this).siblings().html()==undefined){
-            $(this).find("i img").remove()
-        }
-        setAdd(this);
-        $(this).click(function () {
-            $("#Trees li h4").removeClass("Active");
-            $(this).addClass("Active");
-            setAdd(this)
-        })
-    });
-    function setAdd(Div) {
-        if($(Div).attr("select")=="no"){
-            $(Div).attr("select","select");
-            $(Div).siblings("ul").find("li").show();
-            $(Div).find("i img").addClass("ImgActive");
-        }else{
-            $(Div).attr("select","no");
-            $(Div).siblings("ul").find("li").hide();
-            $(Div).find("i img").removeClass("ImgActive");
-        }
-    }
+	$("#Trees li h4").each(function () {
+		if ($(this).attr("select") == "no") {
+			$(this).siblings("ul").find("li").hide();
+			$(this).find("i img").removeClass("ImgActive");
+		} else {
+			$(this).siblings("ul").find("li").show();
+			$(this).find("i img").addClass("ImgActive");
+		}
+		if ($(this).siblings().html() == undefined) {
+			$(this).find("i img").remove();
+		}
+		// setAdd(this);
+		$(this).click(function () {
+			$("#Trees li h4").removeClass("Active");
+			$(this).addClass("Active");
+			setAdd($(this))
+		})
+	});
+	
+	function setAdd(Obj) {
+		if (Obj.attr("select") == "no") {
+			Obj.attr("select", "select");
+			Obj.siblings("ul").find("li").show();
+			Obj.find("i img").addClass("ImgActive");
+			Obj.siblings("ul").find("li").find("ul li").hide();
+			Obj.siblings("ul").find("li").find("h4 i img").removeClass("ImgActive");
+			Obj.siblings("ul").find("li").find("h4").attr("select", "no");
+		} else {
+			Obj.attr("select", "no");
+			Obj.siblings("ul").find("li").hide();
+			Obj.find("i img").removeClass("ImgActive");
+		}
+	}
+	
+	
 });
